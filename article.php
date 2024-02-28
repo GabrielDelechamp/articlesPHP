@@ -1,6 +1,5 @@
 <?php
 require_once('database.php')
-
 ?>
 
 <!DOCTYPE html>
@@ -10,6 +9,9 @@ require_once('database.php')
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="style.css">
+    <style>
+    @import url('https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&display=swap')
+    </style>
 </head>
 <body>
     <?php
