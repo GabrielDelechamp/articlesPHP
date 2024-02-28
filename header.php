@@ -2,5 +2,5 @@
     <img src="images/logo.webp" alt="">
     <a href="index.php">Home</a>
     <a href="#">Services</a>
-    <a href="#">Contact</a>
+    <a href="contact.php">Contact</a>
 </div>
