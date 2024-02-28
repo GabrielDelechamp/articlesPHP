@@ -24,12 +24,14 @@ require_once('database.php')
         echo    '<div class="full-article">
                     <a href="index.php" class="bouton">⬅</a>
                     <h1>'.$resultats['titre'].'</h1>
-                    <p class="contenu-article">'.$resultats['corps_texte'].'</p>
-                    <p class="tags">'.$resultats['tags'].'</p>
-                    <p>Source : '.$resultats['sources'].'</p>
                     <p class="date-article">Actualité crée le : '.$resultats['date_publication'].
                     ' Dernière modification le : '.$resultats['date_revision'].
                     ' Ecrit par : '.$resultats['nom_auteur'].' '.$resultats['prenom_auteur'].'</p>
+                    </br>
+                    </br>
+                    <p class="contenu-article">'.$resultats['corps_texte'].'</p>
+                    <p class="tags">'.$resultats['tags'].'</p>
+                    <p>Source : '.$resultats['sources'].'</p>
                     </div>';
 
     include('footer.php');

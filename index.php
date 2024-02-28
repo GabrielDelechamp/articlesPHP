@@ -21,6 +21,22 @@ require_once('database.php');
     <div class="all-article-container">
 
         <?php
+        if (isset($_POST['nom']) and isset($_POST['prenom']) and isset($_POST['mail'])){
+            $nom="'".$_POST["nom"]."'";
+            $prenom="'".$_POST["prenom"]."'";
+            $mail="'".$_POST["mail"]."'";
+        
+            $sql='INSERT INTO contact (nom_contact,prenom_contact,mail) VALUES ('.$nom.','.$prenom.','.$mail.')';
+            $pdo->exec($sql);
+            echo '<div class="overlay">
+                    <div class="popup">
+                        <a class="close" href="index.php">&times;</a>
+                        <div class="content">
+                            Votre prise de contact à bien été effectué
+                        </div>
+                    </div>
+                </div>';
+        }
         $sql="SELECT * FROM articles";
         $temp = $pdo->prepare($sql);
         $temp->execute();

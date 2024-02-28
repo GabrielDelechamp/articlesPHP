@@ -15,7 +15,7 @@
     ?>
     <div class="all-contact-container">
         <h1>Contact</h1>
-        <form action="contact-confirm.php" method="post">
+        <form action="index.php" method="post">
             <label for="nom">Nom : </label>
             <input type="text" name="nom" id="nom"/>
             <label for="prenom">Prénom : </label>
