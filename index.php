@@ -1,5 +1,4 @@
 <?php
-require_once('database.php');
 require_once('classeActu.php');
 require_once('classeContact.php');
 ?>
@@ -35,6 +34,7 @@ require_once('classeContact.php');
                     </div>
             <?php  }
          }
+         $pdo=DonneesPDO::createPDO();
         $actualites =Actualite::getDatabase($pdo);
         foreach ($actualites as $actualite) {
             $id=$actualite->id;

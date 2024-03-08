@@ -13,7 +13,6 @@
 <?php
     include('header.php');
     require_once('classeContact.php');
-    require_once('database.php');
 
     if (isset($_POST['nom']) and isset($_POST['prenom']) and isset($_POST['mail'])){
         

@@ -1,5 +1,7 @@
 <?php
-class Actualite{
+require_once('classePDO.php');
+
+class Actualite extends DonneesPdo{
     public $id;
     public $titre;
     public $image;
@@ -12,8 +14,7 @@ class Actualite{
     public $sources;
     private $date;
 
-    public function __construct(array $value)
-    {
+    public function __construct(array $value){
         $this->id=$value['id'];
         $this->titre=$value['titre'];
         $this->image=$value['image'];
@@ -25,42 +26,32 @@ class Actualite{
         $this->tags=$value['tags'];
         $this->sources=$value['sources'];
     }
-    
-    public function getAuteur():string
-    {
+    public function getAuteur():string{
         return $this->nom_auteur.' '. $this->prenom_auteur;
     }
-    
-    public function getDate(string $date):string
-    {
+    public function getDate(string $date):string{
         $this->date=$date;
         $year=substr($this->date,0,4);
         $month=substr($this->date,5,2);
         $day=substr($this->date,8,2);
         return $day.'-'.$month.'-'.$year;
     }
-    public static function getDatabase($pdo)
-    {
+    public static function getDatabase($pdo){
         $actualites=[];
         $sql='SELECT * FROM articles,auteur WHERE articles.id_auteur=auteur.id_auteur ORDER BY date_publication LIMIT 5';
-        $temp = $pdo->prepare($sql);
-        $temp->execute();
+        $temp=DonneesPdo::Afficher($sql);
         while($resultats = $temp->fetch(PDO::FETCH_ASSOC)){
             array_push($actualites,new Actualite($resultats));
         }
         return $actualites;
     }
-    public static function getArticle($id,$pdo)
-    {
+    public static function getArticle($id,$pdo){
         $actualites=[];
         $sql='SELECT * FROM articles,auteur WHERE id='.$id.' AND articles.id_auteur=auteur.id_auteur';
-        $temp = $pdo->prepare($sql);
-        $temp->execute();
+        $temp=DonneesPdo::Afficher($sql);
         while($resultats = $temp->fetch(PDO::FETCH_ASSOC)){
             array_push($actualites,new Actualite($resultats));
         }
         return $actualites[0];
-
     }
 }
-?>

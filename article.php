@@ -1,5 +1,4 @@
 <?php
-require_once('database.php');
 require_once('classeActu.php');
 ?>
 
@@ -18,7 +17,7 @@ require_once('classeActu.php');
     <?php
     include('header.php');
 
-    
+    $pdo=DonneesPDO::createPDO();
     $actualite=Actualite::getArticle($_GET['id'],$pdo);
         echo    '<div class="full-article">
                     <a href="index.php" class="bouton">⬅</a>
