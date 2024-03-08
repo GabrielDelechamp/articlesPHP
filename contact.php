@@ -11,20 +11,32 @@
 </head>
 <body>
 <?php
-        include('header.php')
-    ?>
+    include('header.php');
+    require_once('classeContact.php');
+    require_once('database.php');
+
+    if (isset($_POST['nom']) and isset($_POST['prenom']) and isset($_POST['mail'])){
+        
+        $contact= new Contact($_POST["nom"],$_POST["prenom"],$_POST["mail"]);
+        
+        $contact->ajoutContact($contact,$pdo);
+        header('Location: index.php?ok=1');
+        exit();
+    }
+?>
     <div class="all-contact-container">
         <h1>Contact</h1>
-        <form action="index.php" method="post">
+        <form action="contact.php" method="post">
             <label for="nom">Nom : </label>
             <input type="text" name="nom" id="nom"/>
             <label for="prenom">Prénom : </label>
             <input type="text" name="prenom" id="prenom"/>
             <label for="mail">Adresse Mail : </label>
-            <input type="mail" name="mail" id="mail"/>
+            <input type="email" name="mail" id="mail"/>
             <input type="submit">
         </form>
     </div>
+
     <?php
         include('footer.php');
     ?>

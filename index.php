@@ -1,6 +1,7 @@
 <?php
 require_once('database.php');
-
+require_once('classeActu.php');
+require_once('classeContact.php');
 ?>
 
 <!DOCTYPE html>
@@ -21,42 +22,39 @@ require_once('database.php');
     <div class="all-article-container">
 
         <?php
-        if (isset($_POST['nom']) and isset($_POST['prenom']) and isset($_POST['mail'])){
-            $nom="'".$_POST["nom"]."'";
-            $prenom="'".$_POST["prenom"]."'";
-            $mail="'".$_POST["mail"]."'";
-        
-            $sql='INSERT INTO contact (nom_contact,prenom_contact,mail) VALUES ('.$nom.','.$prenom.','.$mail.')';
-            $pdo->exec($sql);
-            echo '<div class="overlay">
-                    <div class="popup">
-                        <a class="close" href="index.php">&times;</a>
-                        <div class="content">
-                            Votre prise de contact à bien été effectué
-                        </div>
-                    </div>
-                </div>';
-        }
-        $sql="SELECT * FROM articles";
-        $temp = $pdo->prepare($sql);
-        $temp->execute();
-        while ($resultats = $temp -> fetch()){
-            $id=$resultats['id'];
-            $titre=$resultats['titre'];
-            $image=$resultats['image'];
-            echo   '<a href="article.php?id='.$id.'">
-                        <div class="article-container">
-                            <div class="article">
-                                <div class="article-image">
-                                    <img src="'.$image.'" alt="">
-                                </div>
-                                <h1>'.$titre.'</h1>
+        if(isset($_GET['ok'])){
+            if ($_GET['ok']==1){
+                ?>
+                <div class="overlay">
+                        <div class="popup">
+                            <a class="close" href="index.php?ok=0">&times;</a>
+                            <div class="content">
+                                Votre prise de contact à bien été effectué
                             </div>
                         </div>
-                    </a>';
-        }
+                    </div>
+            <?php  }
+         }
+        $actualites =Actualite::getDatabase($pdo);
+        foreach ($actualites as $actualite) {
+            $id=$actualite->id;
+            $titre=$actualite->titre;
+            $image=$actualite->image;
+            ?>
+
+            <a href="article.php?id=<?= $id ?>">
+                <div class="article-container">
+                    <div class="article">
+                        <div class="article-image">
+                            <img src="<?= $image ?>" alt="">
+                            </div>
+                        <h1><?= $titre ?></h1>
+                    </div>
+                </div>
+            </a>
+        <?php } ?>
         
-        ?>
+        
     </div>
     <?php
         include('footer.php')

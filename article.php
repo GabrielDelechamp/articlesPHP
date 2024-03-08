@@ -1,5 +1,6 @@
 <?php
-require_once('database.php')
+require_once('database.php');
+require_once('classeActu.php');
 ?>
 
 <!DOCTYPE html>
@@ -17,21 +18,19 @@ require_once('database.php')
     <?php
     include('header.php');
 
-        $sql='SELECT * FROM articles,auteur WHERE id='.$_REQUEST['id'].' AND articles.id_auteur=auteur.id_auteur LIMIT 5';
-        $temp = $pdo->prepare($sql);
-        $temp->execute();
-        $resultats=$temp->fetch();
+    
+    $actualite=Actualite::getArticle($_GET['id'],$pdo);
         echo    '<div class="full-article">
                     <a href="index.php" class="bouton">⬅</a>
-                    <h1>'.$resultats['titre'].'</h1>
-                    <p class="date-article">Actualité crée le : '.$resultats['date_publication'].
-                    ' Dernière modification le : '.$resultats['date_revision'].
-                    ' Ecrit par : '.$resultats['nom_auteur'].' '.$resultats['prenom_auteur'].'</p>
+                    <h1>'.$actualite->titre.'</h1>
+                    <p class="date-article">Actualité crée le : '.$actualite->getDate($actualite->date_publication).
+                    ' Dernière modification le : '.$actualite->getDate($actualite->date_revision).
+                    ' Ecrit par : '.$actualite->getAuteur().'</p>
                     </br>
                     </br>
-                    <p class="contenu-article">'.$resultats['corps_texte'].'</p>
-                    <p class="tags">'.$resultats['tags'].'</p>
-                    <p>Source : '.$resultats['sources'].'</p>
+                    <p class="contenu-article">'.$actualite->corps_texte.'</p>
+                    <p class="tags">'.$actualite->tags.'</p>
+                    <p>Source : '.$actualite->sources.'</p>
                     </div>';
 
     include('footer.php');

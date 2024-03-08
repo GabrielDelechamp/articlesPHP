@@ -137,7 +137,7 @@ body{
     top:15px;
 }
 
-form input[type="text"], form input[type="mail"]{
+form input[type="text"], form input[type="email"]{
     color:#fff;
     padding:3px;
     background: none;
