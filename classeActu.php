@@ -13,7 +13,7 @@ class Actualite extends DonneesPdo{
     public $tags;
     public $sources;
     private $date;
-
+    
     public function __construct(array $value){
         $this->id=$value['id'];
         $this->titre=$value['titre'];

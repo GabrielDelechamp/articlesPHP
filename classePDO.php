@@ -1,6 +1,6 @@
 <?php
 class DonneesPdo{
-
+ 
     public static function createPDO(){
         $pdo = new PDO('mysql:host=localhost;dbname=site_actualites;charset=utf8mb4;port=3306', 'root', '');
         return $pdo;
@@ -15,6 +15,8 @@ class DonneesPdo{
         $pdo=DonneesPdo::createPDO();
         $pdo->exec($sql);
     }
-    
-
+    public static function Modifier($pdo,$id,$titre,$corps_texte){
+        $sql='UPDATE articles SET titre="'.$titre.'", corps_texte="'.$corps_texte.'" WHERE id='.$id;
+        $pdo->exec($sql);
+    }
 }

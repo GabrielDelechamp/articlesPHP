@@ -34,7 +34,7 @@ require_once('classeContact.php');
                     </div>
             <?php  }
          }
-         $pdo=DonneesPDO::createPDO();
+        $pdo=DonneesPDO::createPDO();
         $actualites =Actualite::getDatabase($pdo);
         foreach ($actualites as $actualite) {
             $id=$actualite->id;
